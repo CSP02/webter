@@ -31,7 +31,7 @@ orangeBut.addEventListener('click', () => {
     document.getElementById('type').focus()
 })
 greenBut.addEventListener('click', () => {
-    alert('Didn\'t decided what to do when green is clicked if you have any idea please share.\n\nThank you' )
+    alert('Didn\'t decided what to do when green is clicked if you have any idea please share.\n\nThank you')
 })
 document.getElementById('name').addEventListener('change', () => {
     let userEls = [...document.getElementsByClassName('user')]
@@ -42,8 +42,11 @@ document.getElementById('name').addEventListener('change', () => {
     name.value = ''
     repeatHtml = document.getElementById('repeat').innerHTML
 })
-document.addEventListener('click', () => {
-    document.getElementById('type').focus()
+document.addEventListener('click', (clicked) => {
+    if (clicked.target.id == 'name') { }
+    else
+        document.getElementById('type').focus()
+
 })
 function create() {
     const inputHtml = document.getElementById('type').parentElement
