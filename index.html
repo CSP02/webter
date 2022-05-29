@@ -17,7 +17,8 @@
 
 <body>
     <div id="wrapper">
-        <div id="navbar">
+        <input type="text" placeholder="Enter your name to change the user" id="name" autocomplete="off" spellcheck="false">
+        <div id="navbar" class="navbar">
             <div id="nav">
                 <div id="red"></div>
                 <div id="orange"></div>
@@ -25,27 +26,28 @@
             </div>
             <div id="title">Webter</div>
         </div>
-        <div id="terwin">
+        <div id="terwin" class="terwin">
             <div id="terminal" autoscroll>
-                <br><p>Welcome to the webter!
-                    <br>An example how terminal looks in web(not a real shell). Inspired from <a href="https://github.com/LavSarkari/LavSarkari.github.io/">LavSarkari</a>.
-                    <br>Type help to get commands list
-                    <br><b>Note:</b> This is not a real terminal so real commands wont work here
+                <br><p>Welcome to the webter!</p>
+                    <p>An example how terminal looks in web(not a real shell). Inspired from <a href="https://github.com/LavSarkari/LavSarkari.github.io/">LavSarkari</a>.</p>
+                    <p>Type help to get commands list</p>
+                    <p><b>Note:</b> This is not a real terminal so real commands wont work here
                 </p>
                 <div id="repeat">
                     <div id="loc">
-                        <span class="user">user</span>
-                        <span class="in"> in</span>
-                        <span class="loc"> ./webter</span>
+                        <span class="user" id="user">@user</span>
+                        <span class="in" id="in"> in</span>
+                        <span class="loc" id="location"> ./webter</span>
                     </div>
                     <div id="inp">
-                        <span class="carret"><i class="fa-solid fa-angle-right"></i></span>&nbsp;<input id="type" onchange="create()" autocomplete="off" autofocus>
+                        <span class="carret"><i class="fa-solid fa-angle-right"></i></span>&nbsp;<input id="type" onchange="create()" autocomplete="off" autofocus spellcheck="false">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="script.js"></script>
+    <script src="https://the-atelier.ml/external-scripts/Toggler.js"></script>
 </body>
 
 </html>
