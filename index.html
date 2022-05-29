@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Grape+Nuts&family=Koulen&family=Lobster&family=Poppins:wght@200&family=Roboto:wght@100;300&family=Spline+Sans+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <title>webter</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="navbar">
+            <div id="nav">
+                <div id="red"></div>
+                <div id="orange"></div>
+                <div id="green"></div>
+            </div>
+            <div id="title">Webter</div>
+        </div>
+        <div id="terwin">
+            <div id="terminal" autoscroll>
+                <br><p>Welcome to the webter!
+                    <br>An example how terminal looks in web inspired from <a href="https://github.com/LavSarkari/LavSarkari.github.io/">LavSarkari</a>.
+                    <br>Type help to get commands list
+                    <br><b>Note:</b> This is not a real terminal so real commands wont work here
+                </p>
+                <div id="repeat">
+                    <div id="loc">
+                        <span class="user">user</span>
+                        <span class="in"> in</span>
+                        <span class="loc"> ./webter</span>
+                    </div>
+                    <div id="inp">
+                        <span class="carret"><i class="fa-solid fa-angle-right"></i></span>&nbsp;<input id="type" onchange="create()" autocomplete="off" autofocus>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

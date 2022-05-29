@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgb(37, 37, 37);
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+a{
+    color: white;
+}
+
+#terwin {
+    background-color: rgb(27, 27, 27);
+    padding: 2rem;
+    height: 60vh;
+    width: 60vw;
+    margin: 10rem;
+    display: grid;
+    font-size: 1rem;
+    font-family: 'Spline Sans Mono', monospace;
+    border-radius: 16px;
+    line-height: 2.2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid rgb(104, 104, 104);
+}
+#terwin:hover{
+    cursor: text;
+}
+.user {
+    color: cyan;
+}
+
+.in {
+    color: white;
+}
+
+.loc {
+    color: purple;
+}
+
+.carret{
+    color: rgb(69, 205, 69);
+}
+
+.carretRed, .redTxt {
+    color: rgb(255, 110, 78);
+}
+
+#wrapper {
+    display: grid;
+    justify-items: center;
+}
+
+#navbar {
+    position: fixed;
+    margin-top: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 1rem;
+    font-family: 'Spline Sans Mono', monospace;
+    background-color: rgb(64, 64, 64);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-top: 1px solid rgb(115, 115, 115);
+    height: 2.5rem;
+    width: 64.2vw;
+}
+
+#title{
+    width: 63vw;
+    text-align: center;
+}
+
+#nav{
+    display: flex;
+    margin: 0.3rem;
+}
+#nav:hover, #navbar:hover{
+    cursor: pointer;
+}
+#nav div{
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    margin: 0.3rem;
+}
+
+#red{
+    background-color: red;
+}
+#orange{
+    background-color: orange;
+}
+#green{
+    background-color: rgb(34, 173, 34);
+}
+
+input {
+    width: 47vw;
+    border: none;
+    background-color: unset;
+    outline: none;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Spline Sans Mono', monospace;
+}
+
+::-webkit-scrollbar {
+    background-color: rgb(34, 34, 34);
+    border-right: 1px solid rgb(115, 115, 115);
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(70, 70, 70);
+    border-radius: 16px;
+}
