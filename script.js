@@ -1,28 +1,41 @@
+const repeat = document.getElementById('repeat').innerHTML
 let repeatHtml = document.getElementById('repeat').innerHTML
 const terminal = document.getElementById('terminal')
-const terHtml = terminal.innerHTML
 const redBut = document.getElementById('red')
 const orangeBut = document.getElementById('orange')
 const greenBut = document.getElementById('green')
+const resetHtml = [`<br><p>Welcome to the webter!</p>
+                    <p>Just a terminal like thing in web(not a real shell). Inspired from <a href="https://github.com/LavSarkari/LavSarkari.github.io/">LavSarkari</a>.</p>
+                    <p>Type help to get commands list</p>
+                    <p><b>Note:</b> This is not a real terminal so real commands wont work here
+                    </p>`,
+    `<div id="repeat">
+                    <div id="loc">
+                        <span class="user" id="user">@user</span>
+                        <span class="in" id="in"> in</span>
+                        <span class="loc" id="location"> ./webter</span>
+                    </div>
+                    <div id="inp">
+                        <span class="carret"><i class="fa-solid fa-angle-right"></i></span>&nbsp;<input id="type" onchange="create()" autocomplete="off" autofocus spellcheck="false">
+                    </div>
+                </div>`]
+let output
 
-//not working well so this feature is removed
-//
-// redBut.addEventListener('click', () => {
-//     const innerChild = [...terminal.childNodes]
-//     terminal.innerHTML = ''
-//     let i = 0
-//     let interval = setInterval(function () {
-//         if (i >= innerChild.length)
-//             clearInterval(interval);
-//         else
-//             terminal.appendChild(innerChild[i]);
-//         console.log(i)
-//         i++
-//     }, 500)
-//     if (i >= 12) {
-//         document.getElementById('type').focus()
-//     }
-// })
+redBut.addEventListener('click', () => {
+    const innerChild = resetHtml
+    terminal.innerHTML = ''
+    let i = 0
+    let interval = setInterval(function () {
+        if (i >= innerChild.length)
+            clearInterval(interval);
+        else
+            terminal.innerHTML += innerChild[i];
+        i++
+    }, 700)
+    if (document.getElementById('type'))
+        document.getElementById('type').focus()
+    repeatHtml = repeatHtml.replace(`${repeatHtml.innerText}`, '@user')
+})
 orangeBut.addEventListener('click', () => {
     const toggler = new Toggler
     toggler.toggleClass('terwin', 'terwin', 'terwinFullScr');
@@ -30,25 +43,30 @@ orangeBut.addEventListener('click', () => {
     toggler.toggleProperty('title', 'width', '63vw', '100vw')
     document.getElementById('type').focus()
 })
+
 greenBut.addEventListener('click', () => {
     alert('Didn\'t decided what to do when green is clicked if you have any idea please share.\n\nThank you')
 })
+
 document.getElementById('name').addEventListener('change', () => {
     let userEls = [...document.getElementsByClassName('user')]
     const name = document.getElementById('name')
+    repeatHtml = repeatHtml.replace('@user', `@${name.value.trim().replace(' ', '-').toLowerCase()}`)
     userEls.forEach(user => {
         user.innerText = `@${name.value.trim().replace(' ', '-').toLowerCase()}`
     })
     name.value = ''
-    repeatHtml = document.getElementById('repeat').innerHTML
 })
+
 document.addEventListener('click', (clicked) => {
     if (clicked.target.id == 'name') { }
     else
-        document.getElementById('type').focus()
-
+        if (document.getElementById('type'))
+            document.getElementById('type').focus()
 })
+
 function create() {
+    let isClearCmd = false
     const inputHtml = document.getElementById('type').parentElement
     let val = document.getElementById('type').value
     document.getElementById('type').remove()
@@ -71,11 +89,13 @@ function create() {
                         source:&nbsp;<a href="https://github.com/Chandra-sekhar-pilla/webter">https://github.com/Chandra-sekhar-pilla/webter</a><br>
                     </span>`
             break;
+        case 'clear':
+            isClearCmd = true
+            break
         default:
             function looseJsonParse(obj) {
                 return Function('"use strict";return (' + obj + ')')();
             }
-            let output
             try {
                 output = looseJsonParse(val)
             } catch (e) {
@@ -88,17 +108,59 @@ function create() {
                     <span>
                         ${output}<br>
                     </span>`
-            } else
+            }
+            if (val.includes('console.log')) {
+                inputHtml.innerHTML = `
+                    <span class="carret"><i class="fa-solid fa-angle-right"></i></span>
+                    <span class="text">${val}</span><br>`
+                copyOutput(inputHtml)
+            }
+            else
                 inputHtml.innerHTML = `
                     <span class="carretRed"><i class="fa-solid fa-angle-right"></i></span>
                     <span class="redTxt">${val}</span><br>
-                    <span>Command doesn't exist: ${val.split(' ')[0]}<br><b>If you are trying console.log() view the browser's console.</b></span>`
+                    <span>Command doesn't exist: ${val.split(' ')[0]}<br></span>`
     }
-    terminal.innerHTML += repeatHtml
+    if (!isClearCmd)
+        terminal.innerHTML += repeatHtml
+    else {
+        terminal.innerHTML = repeat
+        isClearCmd = false
+    }
     document.getElementById('type').scrollTo()
 }
 
 window.onchange = function (changed) {
     document.getElementById('terwin').scrollTo(0, document.getElementById('terwin').scrollHeight)
     document.getElementById('type').focus()
+}
+
+
+var baseLogFunction = console.log;
+console.log = function () {
+    baseLogFunction.apply(console, arguments);
+    var args = Array.prototype.slice.call(arguments);
+    for (var i = 0; i < args.length; i++) {
+        var node = createLogNode(args[i]);
+        document.querySelector('#mylog').appendChild(node);
+    }
+}
+
+function createLogNode(message) {
+    var node = document.createElement("div");
+    var textNode = document.createTextNode(message);
+    node.appendChild(textNode);
+    return node;
+}
+
+window.onerror = function (message, url, linenumber) {
+    console.log("JavaScript error: " + message + " on line " +
+        linenumber + " for " + url);
+}
+
+function copyOutput(inputHtml) {
+    output = document.getElementById('mylog').innerText
+    inputHtml.innerHTML += `<span>${output.replaceAll('\n', '<br>')}</span>`
+    document.getElementById('mylog').innerHTML = ''
+    console.clear()
 }

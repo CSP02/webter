@@ -119,7 +119,10 @@ a {
 #green {
     background-color: rgb(34, 173, 34);
 }
-
+#mylog{
+    background-color: white;
+    color: black;
+}
 input {
     width: 47vw;
     border: none;
