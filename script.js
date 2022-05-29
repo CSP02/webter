@@ -42,7 +42,9 @@ document.getElementById('name').addEventListener('change', () => {
     name.value = ''
     repeatHtml = document.getElementById('repeat').innerHTML
 })
-
+document.addEventListener('click', () => {
+    document.getElementById('type').focus()
+})
 function create() {
     const inputHtml = document.getElementById('type').parentElement
     let val = document.getElementById('type').value
