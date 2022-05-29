@@ -53,7 +53,6 @@ function create() {
                     <span>
                         commands:<br>help:<br>shows the commands.<br>
                         source:<br>sends the github link of this site.<br>
-                        clear:<br>clears the whole terminal<br>
                         <br>Webter can perfrom some basic arithmetic operation like addition, substraction, division, multiplication, etc.
                     </span>`
             break;
@@ -64,9 +63,6 @@ function create() {
                     <span>
                         source:&nbsp;<a href="https://github.com/Chandra-sekhar-pilla/webter">https://github.com/Chandra-sekhar-pilla/webter</a><br>
                     </span>`
-            break;
-        case 'clear':
-            terminal.innerHTML = terHtml.replace(`${repeatHtml}`, '')
             break;
         default:
             function looseJsonParse(obj) {

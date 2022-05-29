@@ -104,7 +104,10 @@ a {
     border-radius: 50%;
     margin: 0.3rem;
 }
-
+#navbar{
+    background-color: rgba(57, 57, 57, 0.6);
+    backdrop-filter: blur(18px);
+}
 #red {
     background-color: red;
 }
@@ -170,7 +173,6 @@ input {
     justify-content: flex-start;
     font-size: 1rem;
     font-family: 'Spline Sans Mono', monospace;
-    background-color: rgb(64, 64, 64);
     border-top: 1px solid rgb(115, 115, 115);
     transition: 0.6s ease-in-out;
     height: 2.5rem;
