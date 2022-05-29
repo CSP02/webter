@@ -5,22 +5,24 @@ const redBut = document.getElementById('red')
 const orangeBut = document.getElementById('orange')
 const greenBut = document.getElementById('green')
 
-redBut.addEventListener('click', () => {
-    const innerChild = [...terminal.childNodes]
-    terminal.innerHTML = ''
-    let i = 0
-    let interval = setInterval(function () {
-        if (i >= innerChild.length)
-            clearInterval(interval);
-        else
-            terminal.appendChild(innerChild[i]);
-        console.log(i)
-        i++
-    }, 500)
-    if (i >= 12) {
-        document.getElementById('type').focus()
-    }
-})
+//not working well so this feature is removed
+//
+// redBut.addEventListener('click', () => {
+//     const innerChild = [...terminal.childNodes]
+//     terminal.innerHTML = ''
+//     let i = 0
+//     let interval = setInterval(function () {
+//         if (i >= innerChild.length)
+//             clearInterval(interval);
+//         else
+//             terminal.appendChild(innerChild[i]);
+//         console.log(i)
+//         i++
+//     }, 500)
+//     if (i >= 12) {
+//         document.getElementById('type').focus()
+//     }
+// })
 orangeBut.addEventListener('click', () => {
     const toggler = new Toggler
     toggler.toggleClass('terwin', 'terwin', 'terwinFullScr');
