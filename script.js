@@ -4,6 +4,7 @@ const terminal = document.getElementById('terminal')
 const redBut = document.getElementById('red')
 const orangeBut = document.getElementById('orange')
 const greenBut = document.getElementById('green')
+const terwin = document.getElementById('terwin')
 let user = '@user'
 
 const resetHtml = [`<br><p>Welcome to the webter!</p>
@@ -46,24 +47,23 @@ orangeBut.addEventListener('click', () => {
     const toggler = new Toggler
     toggler.toggleClass('terwin', 'terwin', 'terwinFullScr');
     toggler.toggleClass('navbar', 'navbar', 'navbarFullScr');
-    toggler.toggleProperty('title', 'width', '63vw', '100vw')
+    toggler.toggleProperty('title', 'width', '63vw', '100vw');
+    toggler.toggleProperty('type', 'font-size', '1rem', '1.2rem')
+    toggler.toggleProperty('terwin', 'height', '60vh', '94vh')
     document.getElementById('type').focus()
 })
 
 greenBut.addEventListener('click', () => {
-    alert('Didn\'t decided what to do when green is clicked if you have any idea please share.\n\nThank you')
+    const toggler = new Toggler
+    if (terwin.className.includes('FullScr'))
+        toggler.toggleProperty('terwin', 'height', '92vh', '0vh')
+    else
+        toggler.toggleProperty('terwin', 'height', '60vh', '0vh')
+    // toggler.toggleSlide('terwin', 'top', 0.2)
 })
 
 document.getElementById('name').addEventListener('change', () => {
-    let userEls = [...document.getElementsByClassName('user')]
-    const name = document.getElementById('name')
-    repeatHtml = repeatHtml.replace(`${user}`, `@${name.value.trim().replace(' ', '-').toLowerCase()}`)
-    repeat = repeat.replace(`${user}`, `@${name.value.trim().replace(' ', '-').toLowerCase()}`)
-    user = `@${name.value.trim().replace(' ', '-').toLowerCase()}`
-    userEls.forEach(user => {
-        user.innerText = `@${name.value.trim().replace(' ', '-').toLowerCase()}`
-    })
-    name.value = ''
+    ChangeName(false, null);
 })
 
 document.addEventListener('click', (clicked) => {
@@ -77,6 +77,7 @@ function create() {
     let isClearCmd = false
     const inputHtml = document.getElementById('type').parentElement
     let val = document.getElementById('type').value
+    const valTag = document.getElementById('type')
     document.getElementById('type').remove()
     switch (val.split(' ')[0]) {
         case 'help':
@@ -84,8 +85,15 @@ function create() {
                     <span class="carret"><i class="fa-solid fa-angle-right"></i></span>
                     <span class="text">${val}</span><br>
                     <span>
-                        commands:<br>help:<br>shows the commands.<br>
-                        source:<br>sends the github link of this site.<br>
+                        <b>commands:</b><br>
+                        <br><span class="greenTxt">help</span>: shows the commands.<br>
+                        <br><span class="greenTxt">source</span>: sends the github link of this site.<br>
+                        <br><span class="greenTxt">clear</span>: clears the terminal<br>
+                        <br><span class="greenTxt">changeUser</span>: changes the user(you can also change at the about input section)<br>
+                        <br><br><b>Navigation Button fucntions:</b><br>
+                        <br><span class="greenTxt">Red Button</span>: Restart the terminal.<br>
+                        <br><span class="greenTxt">Orange Button</span>: Maximize/Restore down the terminal.<br>
+                        <br><span class="greenTxt">Green Button</span>: Minimize the terminal<br>
                         <br>Webter can perfrom some basic arithmetic operation like addition, substraction, division, multiplication, etc.
                     </span>`
             break;
@@ -99,7 +107,22 @@ function create() {
             break;
         case 'clear':
             isClearCmd = true
-            break
+            break;
+        case 'changeUser':
+            const isChanged = ChangeName(true, valTag);
+            if (isChanged)
+                inputHtml.innerHTML = `
+                    <span class="carret"><i class="fa-solid fa-angle-right"></i></span>
+                    <span class="text">${val}</span><br>
+                    <span>
+                    User changed.
+                    </span>`
+            else
+                inputHtml.innerHTML = `
+                    <span class="carretRed"><i class="fa-solid fa-angle-right"></i></span>
+                    <span class="redTxt">${val}</span><br>
+                    <span>Enter a username to change.<br></span>`
+            break;
         default:
             try {
                 output = looseJsonParse(val)
@@ -120,7 +143,7 @@ function create() {
                     <span class="text">${val}</span><br>`
                 copyOutput(inputHtml)
             }
-            else if(output.toString().includes('redTxt'))
+            else if (output.toString().includes('redTxt'))
                 inputHtml.innerHTML = `
                     <span class="carretRed"><i class="fa-solid fa-angle-right"></i></span>
                     <span class="redTxt">${val}</span><br>
@@ -144,7 +167,32 @@ function create() {
 
 window.onchange = function (changed) {
     document.getElementById('terwin').scrollTo(0, document.getElementById('terwin').scrollHeight)
+    const toggler = new Toggler
+    // toggler.toggleProperty('type', 'font-size', '1rem', '1.2rem')
     document.getElementById('type').focus()
+}
+
+function ChangeName(isCmd, val) {
+    let userEls = [...document.getElementsByClassName('user')]
+    let name
+    let isChanged = false
+    if (!isCmd)
+        name = document.getElementById('name')
+    else
+        name = val
+    if (name.value.replace('changeUser', '').trim().replace(' ', '-').toLowerCase() != '') {
+        repeatHtml = repeatHtml.replace(`${user}`, `@${name.value.replace('changeUser', '').trim().replace(' ', '-').toLowerCase()}`)
+        repeat = repeat.replace(`${user}`, `@${name.value.replace('changeUser', '').trim().replace(' ', '-').toLowerCase()}`)
+        user = `@${name.value.replace('changeUser ', '').trim().replace(' ', '-').toLowerCase()}`
+        userEls.forEach(user => {
+            user.innerText = `@${name.value.replace('changeUser', '').trim().replace(' ', '-').toLowerCase()}`
+        })
+        name.value = ''
+        isChanged = true
+    } else { 
+        isChanged = false
+    }
+    return isChanged;
 }
 
 function looseJsonParse(obj) {
@@ -166,11 +214,6 @@ function createLogNode(message) {
     var textNode = document.createTextNode(message);
     node.appendChild(textNode);
     return node;
-}
-
-window.onerror = function (message, url, linenumber) {
-    console.log("JavaScript error: " + message + " on line " +
-        linenumber + " for " + url);
 }
 
 function copyOutput(inputHtml) {

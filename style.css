@@ -31,7 +31,7 @@ a {
     line-height: 2.2rem;
     overflow-y: auto;
     overflow-x: hidden;
-    transition: 0.6s ease-in-out;
+    transition: 0.2s ease-in-out;
     border: 1px solid rgb(104, 104, 104);
 }
 
@@ -51,7 +51,7 @@ a {
     color: purple;
 }
 
-.carret {
+.carret, .greenTxt {
     color: rgb(69, 205, 69);
 }
 
@@ -76,7 +76,7 @@ a {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     border-top: 1px solid rgb(115, 115, 115);
-    transition: 0.6s ease-in-out;
+    transition: 0.2s ease-in-out;
     height: 2.5rem;
     width: 64.2vw;
     z-index: 1;
@@ -84,7 +84,7 @@ a {
 
 #title {
     width: 63vw;
-    transition: 0.6s ease-in-out;
+    transition: 0.2s ease-in-out;
     text-align: center;
 }
 
@@ -124,7 +124,7 @@ a {
     color: black;
 }
 input {
-    width: 47vw;
+    width: 43vw;
     border: none;
     background-color: unset;
     outline: none;
@@ -163,7 +163,7 @@ input {
     font-size: 1.2rem;
     font-family: 'Spline Sans Mono', monospace;
     border: 1px solid rgb(104, 104, 104);
-    transition: 0.6s ease-in-out;
+    transition: 0.2s ease-in-out;
     line-height: 2.4rem;
     z-index: 0;
 }
@@ -177,7 +177,7 @@ input {
     font-size: 1rem;
     font-family: 'Spline Sans Mono', monospace;
     border-top: 1px solid rgb(115, 115, 115);
-    transition: 0.6s ease-in-out;
+    transition: 0.2s ease-in-out;
     height: 2.5rem;
     width: 100vw;
     z-index: 1;
