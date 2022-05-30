@@ -1,9 +1,11 @@
-const repeat = document.getElementById('repeat').innerHTML
+let repeat = document.getElementById('repeat').innerHTML
 let repeatHtml = document.getElementById('repeat').innerHTML
 const terminal = document.getElementById('terminal')
 const redBut = document.getElementById('red')
 const orangeBut = document.getElementById('orange')
 const greenBut = document.getElementById('green')
+let user = '@user'
+
 const resetHtml = [`<br><p>Welcome to the webter!</p>
                     <p>Just a terminal like thing in web(not a real shell). Inspired from <a href="https://github.com/LavSarkari/LavSarkari.github.io/">LavSarkari</a>.</p>
                     <p>Type help to get commands list</p>
@@ -34,7 +36,11 @@ redBut.addEventListener('click', () => {
     }, 700)
     if (document.getElementById('type'))
         document.getElementById('type').focus()
-    repeatHtml = repeatHtml.replace(`${repeatHtml.innerText}`, '@user')
+    repeatHtml = repeatHtml.replaceAll(`${repeatHtml.innerText}`, '@user')
+    repeat = repeat.replaceAll(`${user}`, `@user`)
+    repeatHtml = repeatHtml.replaceAll(`${user}`, `@user`)
+    document.getElementById('mylog').innerHTML = ''
+    user = '@user'
 })
 orangeBut.addEventListener('click', () => {
     const toggler = new Toggler
@@ -51,7 +57,9 @@ greenBut.addEventListener('click', () => {
 document.getElementById('name').addEventListener('change', () => {
     let userEls = [...document.getElementsByClassName('user')]
     const name = document.getElementById('name')
-    repeatHtml = repeatHtml.replace('@user', `@${name.value.trim().replace(' ', '-').toLowerCase()}`)
+    repeatHtml = repeatHtml.replace(`${user}`, `@${name.value.trim().replace(' ', '-').toLowerCase()}`)
+    repeat = repeat.replace(`${user}`, `@${name.value.trim().replace(' ', '-').toLowerCase()}`)
+    user = `@${name.value.trim().replace(' ', '-').toLowerCase()}`
     userEls.forEach(user => {
         user.innerText = `@${name.value.trim().replace(' ', '-').toLowerCase()}`
     })
@@ -93,9 +101,6 @@ function create() {
             isClearCmd = true
             break
         default:
-            function looseJsonParse(obj) {
-                return Function('"use strict";return (' + obj + ')')();
-            }
             try {
                 output = looseJsonParse(val)
             } catch (e) {
@@ -115,11 +120,18 @@ function create() {
                     <span class="text">${val}</span><br>`
                 copyOutput(inputHtml)
             }
-            else
+            else if(output.toString().includes('redTxt'))
                 inputHtml.innerHTML = `
                     <span class="carretRed"><i class="fa-solid fa-angle-right"></i></span>
                     <span class="redTxt">${val}</span><br>
                     <span>Command doesn't exist: ${val.split(' ')[0]}<br></span>`
+            else
+                inputHtml.innerHTML = `
+                    <span class="carret"><i class="fa-solid fa-angle-right"></i></span>
+                    <span class="text">${val}</span><br>
+                    <span>
+                        ${output}<br>
+                    </span>`
     }
     if (!isClearCmd)
         terminal.innerHTML += repeatHtml
@@ -135,6 +147,9 @@ window.onchange = function (changed) {
     document.getElementById('type').focus()
 }
 
+function looseJsonParse(obj) {
+    return Function('"use strict";return (' + obj + ')')();
+}
 
 var baseLogFunction = console.log;
 console.log = function () {
