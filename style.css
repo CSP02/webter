@@ -59,6 +59,10 @@ a {
     color: rgb(255, 110, 78);
 }
 
+.orangeTxt{
+    color: rgb(231, 168, 49);
+}
+
 #wrapper {
     display: grid;
     justify-items: center;

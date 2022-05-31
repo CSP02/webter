@@ -91,8 +91,8 @@ function create() {
                         <br><span class="greenTxt">clear</span>: clears the terminal<br>
                         <br><span class="greenTxt">changeUser</span>: changes the user(you can also change at the about input section)<br>
                         <br><br><b>Navigation Button fucntions:</b><br>
-                        <br><span class="greenTxt">Red Button</span>: Restart the terminal.<br>
-                        <br><span class="greenTxt">Orange Button</span>: Maximize/Restore down the terminal.<br>
+                        <br><span class="redTxt">Red Button</span>: Restart the terminal.<br>
+                        <br><span class="orangeTxt">Orange Button</span>: Maximize/Restore down the terminal.<br>
                         <br><span class="greenTxt">Green Button</span>: Minimize the terminal<br>
                         <br>Webter can perfrom some basic arithmetic operation like addition, substraction, division, multiplication, etc.
                     </span>`
@@ -167,9 +167,11 @@ function create() {
 
 window.onchange = function (changed) {
     document.getElementById('terwin').scrollTo(0, document.getElementById('terwin').scrollHeight)
-    const toggler = new Toggler
-    // toggler.toggleProperty('type', 'font-size', '1rem', '1.2rem')
     document.getElementById('type').focus()
+}
+
+window.onload = function () {
+    document.getElementById('mylog').innerHTML = ''
 }
 
 function ChangeName(isCmd, val) {
