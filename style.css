@@ -17,13 +17,11 @@ a {
 }
 
 .terwin {
-    z-index: 0;
-    position: fixed;
+    position: relative;
     background-color: rgb(27, 27, 27);
     padding: 2rem;
     height: 60vh;
-    width: 60vw;
-    margin: 10rem;
+    width: 70dvw;
     display: grid;
     font-size: 1rem;
     font-family: 'Spline Sans Mono', monospace;
@@ -70,10 +68,9 @@ a {
 
 .navbar {
     position: fixed;
-    margin-top: 10rem;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     font-size: 1rem;
     font-family: 'Spline Sans Mono', monospace;
     background-color: rgb(64, 64, 64);
@@ -81,13 +78,15 @@ a {
     border-top-right-radius: 6px;
     border-top: 1px solid rgb(115, 115, 115);
     transition: 0.2s ease-in-out;
-    height: 2.5rem;
-    width: 64.2vw;
-    z-index: 1;
+    padding: .1rem;
+    width: calc(70dvw + 4rem - 4px);
+}
+
+#navbar div{
+    width: 20dvw;
 }
 
 #title {
-    width: 63vw;
     transition: 0.2s ease-in-out;
     text-align: center;
 }
@@ -95,11 +94,14 @@ a {
 #nav {
     display: flex;
     margin: 0.3rem;
-    position: absolute;
 }
 
-#nav:hover, .navbar:hover{
+#nav div:hover{
     cursor: pointer;
+}
+
+.navbar:hover{
+    cursor: normal;
 }
 
 #nav div {
@@ -138,7 +140,7 @@ input {
 }
 
 #name {
-    margin-top: 2rem;
+    padding: 1.5rem;
     text-align: center;
 }
 
@@ -156,37 +158,33 @@ input {
 }
 
 .terwinFullScr {
-    position: fixed;
-    height: 94vh;
-    width: 96vw;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: rgb(27, 27, 27);
-    padding: 2rem;
-    display: grid;
+    position: absolute;
+    top: 0;
     font-size: 1.2rem;
-    font-family: 'Spline Sans Mono', monospace;
-    border: 1px solid rgb(104, 104, 104);
-    transition: 0.2s ease-in-out;
-    line-height: 2.4rem;
-    z-index: 0;
+    height: calc(100dvh - 4px - 4rem);
+    width: calc(100dvw - 4rem - 4px);
 }
 
 .navbarFullScr {
-    position: fixed;
-    display: flex;
-    margin-top: 0;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 1rem;
-    font-family: 'Spline Sans Mono', monospace;
-    border-top: 1px solid rgb(115, 115, 115);
-    transition: 0.2s ease-in-out;
-    height: 2.5rem;
-    width: 100vw;
-    z-index: 1;
+    width: calc(100dvw - 4px - .2rem);
 }
 
 .terwinFullScr #terminal {
     margin-left: 0.5rem;
+}
+
+.terwin_close{
+    height: 0px;
+    width: 20dvw;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.navbar_close{
+    width: calc(20dvw + 4rem - 4px);
+}
+
+#mylog{
+    display: none;
 }

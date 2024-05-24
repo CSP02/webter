@@ -5,6 +5,7 @@ const redBut = document.getElementById('red')
 const orangeBut = document.getElementById('orange')
 const greenBut = document.getElementById('green')
 const terwin = document.getElementById('terwin')
+const navbar = document.getElementById("navbar")
 let user = '@user'
 
 const resetHtml = [`<br><p>Welcome to the webter!</p>
@@ -44,22 +45,16 @@ redBut.addEventListener('click', () => {
     user = '@user'
 })
 orangeBut.addEventListener('click', () => {
-    const toggler = new Toggler
-    toggler.toggleClass('terwin', 'terwin', 'terwinFullScr');
-    toggler.toggleClass('navbar', 'navbar', 'navbarFullScr');
-    toggler.toggleProperty('title', 'width', '63vw', '100vw');
-    toggler.toggleProperty('type', 'font-size', '1rem', '1.2rem')
-    toggler.toggleProperty('terwin', 'height', '60vh', '94vh')
+    terwin.classList.remove("terwin_close")
+    navbar.classList.remove("navbar_close")
+    terwin.classList.toggle("terwinFullScr")
+    navbar.classList.toggle("navbarFullScr")
     document.getElementById('type').focus()
 })
 
 greenBut.addEventListener('click', () => {
-    const toggler = new Toggler
-    if (terwin.className.includes('FullScr'))
-        toggler.toggleProperty('terwin', 'height', '92vh', '0vh')
-    else
-        toggler.toggleProperty('terwin', 'height', '60vh', '0vh')
-    // toggler.toggleSlide('terwin', 'top', 0.2)
+    terwin.classList.toggle("terwin_close")
+    navbar.classList.toggle("navbar_close")
 })
 
 document.getElementById('name').addEventListener('change', () => {
@@ -86,15 +81,16 @@ function create() {
                     <span class="text">${val}</span><br>
                     <span>
                         <b>commands:</b><br>
-                        <br><span class="greenTxt">help</span>: shows the commands.<br>
-                        <br><span class="greenTxt">source</span>: sends the github link of this site.<br>
-                        <br><span class="greenTxt">clear</span>: clears the terminal<br>
-                        <br><span class="greenTxt">changeUser</span>: changes the user(you can also change at the about input section)<br>
-                        <br><br><b>Navigation Button fucntions:</b><br>
-                        <br><span class="redTxt">Red Button</span>: Restart the terminal.<br>
-                        <br><span class="orangeTxt">Orange Button</span>: Maximize/Restore down the terminal.<br>
-                        <br><span class="greenTxt">Green Button</span>: Minimize the terminal<br>
-                        <br>Webter can perfrom some basic arithmetic operation like addition, substraction, division, multiplication, etc.
+                        <span class="greenTxt">help</span>: shows the commands.<br>
+                        <span class="greenTxt">source</span>: sends the github link of this site.<br>
+                        <span class="greenTxt">clear</span>: clears the terminal<br>
+                        <span class="greenTxt">changeUser</span>: changes the user(you can also change at the about input section)<br>
+                        <br><b>Navigation Button fucntions:</b><br>
+                        <span class="redTxt">Red Button</span>: Restart the terminal.<br>
+                        <span class="orangeTxt">Orange Button</span>: Maximize/Restore down the terminal.<br>
+                        <span class="greenTxt">Green Button</span>: Minimize the terminal<br>
+                        Webter can perfrom some basic arithmetic operation like addition, substraction, division, multiplication, etc.
+                        <span>It can also perform some js methods</span>
                     </span>`
             break;
         case 'source':
@@ -128,6 +124,7 @@ function create() {
                 output = looseJsonParse(val)
             } catch (e) {
                 output = `<span class="redTxt">${e.stack.replaceAll('\n', '<br>')}</span>`
+                console.log(output)
             }
             if (!isNaN(val.replace(/[^\w\s]/gi, '')) || output) {
                 inputHtml.innerHTML = `
@@ -143,18 +140,19 @@ function create() {
                     <span class="text">${val}</span><br>`
                 copyOutput(inputHtml)
             }
-            else if (output.toString().includes('redTxt'))
+            else if (output.toString().includes('redTxt')) {
                 inputHtml.innerHTML = `
                     <span class="carretRed"><i class="fa-solid fa-angle-right"></i></span>
                     <span class="redTxt">${val}</span><br>
                     <span>Command doesn't exist: ${val.split(' ')[0]}<br></span>`
-            else
+            } else {
                 inputHtml.innerHTML = `
                     <span class="carret"><i class="fa-solid fa-angle-right"></i></span>
                     <span class="text">${val}</span><br>
                     <span>
                         ${output}<br>
                     </span>`
+            }
     }
     if (!isClearCmd)
         terminal.innerHTML += repeatHtml
@@ -191,7 +189,7 @@ function ChangeName(isCmd, val) {
         })
         name.value = ''
         isChanged = true
-    } else { 
+    } else {
         isChanged = false
     }
     return isChanged;
@@ -205,6 +203,7 @@ var baseLogFunction = console.log;
 console.log = function () {
     baseLogFunction.apply(console, arguments);
     var args = Array.prototype.slice.call(arguments);
+    document.querySelector('#mylog').innerHTML = ""
     for (var i = 0; i < args.length; i++) {
         var node = createLogNode(args[i]);
         document.querySelector('#mylog').appendChild(node);
